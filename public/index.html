@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Martin Mwangi — DevFolio (Demo)</title>
+  <meta name="description" content="DevFolio — portfolio demo for Martin Mwangi" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#home">Martin Mwangi</a>
+        <span class="tag">Full-Stack Developer</span>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Portfolio</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
+      </nav>
+
+      <button id="mobileMenuBtn" class="icon-btn mobile-only" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1>Hi, I’m <span class="accent">Martin</span>.</h1>
+          <p class="lead">I build modern, reliable web apps & beautiful front-ends that help small businesses and startups grow.</p>
+          <div class="cta-row">
+            <a href="#contact" class="btn primary">Hire me</a>
+            <a href="#projects" class="btn outline">See my work</a>
+          </div>
+          <ul class="skills">
+            <li>React</li>
+            <li>Node.js</li>
+            <li>HTML & CSS</li>
+            <li>UI/UX</li>
+          </ul>
+        </div>
+
+        <div class="hero-right">
+          <div class="mockup-card">
+            <img src="assets/mockup.png" alt="project mockup" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About Me</h2>
+        <p>I’m a full-stack developer focused on building performant web applications and polished user experiences. I enjoy working with startups and small teams to turn ideas into production-ready products.</p>
+        <div class="two-col">
+          <div>
+            <h3>Experience</h3>
+            <ul>
+              <li>Front-end & UI: React, Tailwind, modern CSS</li>
+              <li>Back-end: Node.js, Express, REST APIs</li>
+              <li>Databases: SQLite / MongoDB / Postgres</li>
+            </ul>
+          </div>
+          <div>
+            <h3>What I bring</h3>
+            <ul>
+              <li>Clean, responsive UI design</li>
+              <li>Maintainable code and good testing habits</li>
+              <li>Fast delivery and clear communication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section alt">
+      <div class="container">
+        <h2>Services</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Web Development</h3>
+            <p>Responsive websites, SPAs, and PWAs using React, Next.js, or vanilla JS.</p>
+          </div>
+          <div class="card">
+            <h3>UI/UX Design</h3>
+            <p>Design systems, prototypes, and pixel-perfect front-end implementations.</p>
+          </div>
+          <div class="card">
+            <h3>Custom Systems</h3>
+            <p>Small business systems: CRM, invoicing, automation and integrations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Portfolio</h2>
+        <p class="muted">Selected projects — click to view details</p>
+
+        <div id="projectsGrid" class="projects-grid">
+          <!-- populated by script -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section alt">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>Interested in working together? Drop me a message.</p>
+
+        <form id="contactForm" class="contact-form">
+          <input type="text" id="name" placeholder="Your name" required />
+          <input type="email" id="email" placeholder="Your email" required />
+          <textarea id="message" rows="6" placeholder="How can I help?" required></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Send message</button>
+            <button type="button" id="clearBtn" class="btn outline">Clear</button>
+          </div>
+          <p id="formStatus" class="muted"></p>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Martin Mwangi</div>
+      <div class="social">
+        <a href="#" target="_blank">GitHub</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Dribbble</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
