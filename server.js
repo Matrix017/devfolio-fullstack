@@ -1,21 +1,27 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const cors = require('cors');
+// server.js
+import express from "express";
+import path from "path";
+import fs from "fs";
+import cors from "cors";
+import { fileURLToPath } from "url";
+
+// Fix __dirname and __filename for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Data file for demo contact messages
-const DATA_DIR = path.join(__dirname, 'data');
-const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
+// Data directory (for local testing)
+const DATA_DIR = path.join(__dirname, "data");
+const MESSAGES_FILE = path.join(DATA_DIR, "messages.json");
 
-// Ensure data dir + file exist
+// Ensure data directory and file exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
-if (!fs.existsSync(MESSAGES_FILE)) fs.writeFileSync(MESSAGES_FILE, '[]', 'utf8');
+if (!fs.existsSync(MESSAGES_FILE)) fs.writeFileSync(MESSAGES_FILE, "[]", "utf8");
 
-// Sample projects (returned by API)
+// Sample projects (for demo)
 const projects = [
   {
     id: 1,
@@ -23,7 +29,7 @@ const projects = [
     desc: "Inventory management web app — React + Node API",
     img: "/assets/project1.jpg",
     live: "#",
-    code: "#"
+    code: "#",
   },
   {
     id: 2,
@@ -31,7 +37,7 @@ const projects = [
     desc: "Landing page & CMS integration for a local business",
     img: "/assets/project2.jpg",
     live: "#",
-    code: "#"
+    code: "#",
   },
   {
     id: 3,
@@ -39,20 +45,20 @@ const projects = [
     desc: "Internal admin tools with charts and reporting",
     img: "/assets/project3.jpg",
     live: "#",
-    code: "#"
-  }
+    code: "#",
+  },
 ];
 
-// API: get projects
-app.get('/api/projects', (req, res) => {
+// API: fetch projects
+app.get("/api/projects", (req, res) => {
   res.json(projects);
 });
 
-// API: contact (saves to messages.json)
-app.post('/api/contact', (req, res) => {
+// API: save contact messages
+app.post("/api/contact", (req, res) => {
   const { name, email, message } = req.body || {};
   if (!name || !email || !message) {
-    return res.status(400).json({ ok: false, error: 'name, email and message are required' });
+    return res.status(400).json({ ok: false, error: "All fields are required" });
   }
 
   const entry = {
@@ -60,32 +66,32 @@ app.post('/api/contact', (req, res) => {
     name,
     email,
     message,
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   };
 
   try {
-    const raw = fs.readFileSync(MESSAGES_FILE, 'utf8');
-    const arr = JSON.parse(raw || '[]');
+    const raw = fs.readFileSync(MESSAGES_FILE, "utf8");
+    const arr = JSON.parse(raw || "[]");
     arr.push(entry);
-    fs.writeFileSync(MESSAGES_FILE, JSON.stringify(arr, null, 2), 'utf8');
-    return res.json({ ok: true, entry });
+    fs.writeFileSync(MESSAGES_FILE, JSON.stringify(arr, null, 2), "utf8");
+    res.json({ ok: true, entry });
   } catch (err) {
-    console.error('Failed to save message', err);
-    return res.status(500).json({ ok: false, error: 'failed to save message' });
+    console.error("Error saving message:", err);
+    res.status(500).json({ ok: false, error: "Server error saving message" });
   }
 });
 
-// Serve frontend static files from /public
-const publicPath = path.join(__dirname, 'public');
+// Serve static files
+const publicPath = path.join(__dirname, "public");
 app.use(express.static(publicPath));
 
-// SPA fallback — serve index.html for other routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+// SPA fallback (for frontend routes)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`✅ DevFolio server running: http://localhost:${PORT}`);
+  console.log(`✅ DevFolio running at http://localhost:${PORT}`);
 });
