@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build:css": "npx tailwindcss -i ./input.css -o ./public/style.css --watch",
+    "build:css": "npx tailwindcss -i ./input.css -o ./style.css --watch",
     "build": "npm run build:css"
   },
   "author": "Martin Mwangi",
@@ -29,7 +29,13 @@
     "type": "git",
     "url": "git+https://github.com/ShemMartin/devfolio-fullstack.git"
   },
-  "keywords": ["portfolio", "express", "tailwind", "fullstack", "frontend"],
+  "keywords": [
+    "portfolio",
+    "express",
+    "tailwind",
+    "fullstack",
+    "frontend"
+  ],
   "bugs": {
     "url": "https://github.com/ShemMartin/devfolio-fullstack/issues"
   },

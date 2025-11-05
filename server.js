@@ -19,7 +19,8 @@ const MESSAGES_FILE = path.join(DATA_DIR, "messages.json");
 
 // Ensure data directory and file exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR);
-if (!fs.existsSync(MESSAGES_FILE)) fs.writeFileSync(MESSAGES_FILE, "[]", "utf8");
+if (!fs.existsSync(MESSAGES_FILE))
+  fs.writeFileSync(MESSAGES_FILE, "[]", "utf8");
 
 // Sample projects (for demo)
 const projects = [
@@ -58,7 +59,9 @@ app.get("/api/projects", (req, res) => {
 app.post("/api/contact", (req, res) => {
   const { name, email, message } = req.body || {};
   if (!name || !email || !message) {
-    return res.status(400).json({ ok: false, error: "All fields are required" });
+    return res
+      .status(400)
+      .json({ ok: false, error: "All fields are required" });
   }
 
   const entry = {
@@ -82,7 +85,7 @@ app.post("/api/contact", (req, res) => {
 });
 
 // Serve static files
-const publicPath = path.join(__dirname, "public");
+const publicPath = path.join(__dirname, "src");
 app.use(express.static(publicPath));
 
 // SPA fallback (for frontend routes)
@@ -95,3 +98,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ DevFolio running at http://localhost:${PORT}`);
 });
+
